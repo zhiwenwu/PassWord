@@ -9,7 +9,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="160dp"
-        android:text="Test测试"
+        android:text="测试"
         android:id="@+id/btnTest"/>
 
 </LinearLayout>
