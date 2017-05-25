@@ -53,8 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // 当验证的指纹成功时会回调此函数，然后不再监听指纹sensor
         @Override
-        public void onAuthenticationSucceeded(FingerprintManagerCompat.AuthenticationResult
-                                                      result) {
+        public void onAuthenticationSucceeded(FingerprintManagerCompat.AuthenticationResult result) {
             Log.d(TAG, "onAuthenticationSucceeded: " + "验证成功");
         }
     }
