@@ -4,12 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="cn.xuemcu.password.MainActivity">
+    tools:context="cn.xuemcu.password.MainActivity"
+    android:background="@mipmap/passworlback"
+    android:orientation="vertical">
 
-    <Button
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:text="测试"
-        android:id="@+id/btnTest"/>
+        android:layout_height="36dp"
+        android:text="请输入密码:"
+        android:textSize="26dp"
+        android:textColor="#DDA0DD"
+        android:layout_marginLeft="10dp"
+        android:gravity="center_vertical|left"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/editsharp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="6dp"
+        android:gravity="center"
+        android:textSize="36dp"
+        android:id="@+id/edtext"
+        />
 
 </LinearLayout>
