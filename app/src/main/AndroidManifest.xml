@@ -23,6 +23,11 @@
             android:theme="@style/themeFullScreen">
 
         </activity>
+
+        <activity android:name=".PassWordActivity"
+            android:theme="@style/themeFullScreen">
+
+        </activity>
     </application>
 
 </manifest>
