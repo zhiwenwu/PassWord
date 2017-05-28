@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void onAuthenticationSucceeded(FingerprintManagerCompat.AuthenticationResult result) {
             Log.d(TAG, "onAuthenticationSucceeded: " + "验证成功");
             Toast.makeText(MainActivity.this, "onAuthenticationSucceeded: " + "验证成功", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "onAuthenticationSucceeded: " + "123123", Toast.LENGTH_SHORT).show();
         }
     }
 }
