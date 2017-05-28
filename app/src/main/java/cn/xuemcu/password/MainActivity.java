@@ -38,25 +38,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public void onAuthenticationError(int errMsgId, CharSequence errString) {
             Log.d(TAG, "onAuthenticationError: " + errString);
+            Toast.makeText(MainActivity.this, "onAuthenticationError: " + errString, Toast.LENGTH_SHORT).show();
         }
 
         // 当指纹验证失败的时候会回调此函数，失败之后允许多次尝试，失败次数过多会停止响应一段时间然后再停止sensor的工作
         @Override
         public void onAuthenticationFailed() {
             Log.d(TAG, "onAuthenticationFailed: " + "验证失败");
+            Toast.makeText(MainActivity.this, "onAuthenticationFailed: " + "验证失败", Toast.LENGTH_SHORT).show();
         }
 
         @Override
         public void onAuthenticationHelp(int helpMsgId, CharSequence helpString) {
             Log.d(TAG, "onAuthenticationHelp: " + helpString);
+            Toast.makeText(MainActivity.this, "onAuthenticationHelp: " + helpString, Toast.LENGTH_SHORT).show();
         }
 
         // 当验证的指纹成功时会回调此函数，然后不再监听指纹sensor
         @Override
-        public void onAuthenticationSucceeded(FingerprintManagerCompat.AuthenticationResult
-                                                      result) {
+        public void onAuthenticationSucceeded(FingerprintManagerCompat.AuthenticationResult result) {
             Log.d(TAG, "onAuthenticationSucceeded: " + "验证成功");
-            Toast.makeText(MainActivity.this, "123", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "onAuthenticationSucceeded: " + "验证成功", Toast.LENGTH_SHORT).show();
         }
     }
 }
