@@ -14,6 +14,7 @@ public class PassWordActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_password);
 
+        // 进入该界面表明指纹或则密码验证通过
         Toast.makeText(this,"验证通过！",Toast.LENGTH_SHORT).show();
     }
 }
