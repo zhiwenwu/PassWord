@@ -17,7 +17,7 @@ public class WelComeActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
-        //mHandler.sendEmptyMessageAtTime(GOTO_MAIN_ACTIVITY, 3000);//3秒跳转
+        mHandler.sendEmptyMessageDelayed(GOTO_MAIN_ACTIVITY, 3000);//3秒跳转
     }
 
     private Handler mHandler = new Handler(){
