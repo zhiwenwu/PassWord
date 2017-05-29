@@ -22,7 +22,11 @@ public class PassWordAdapter extends ArrayAdapter<PassWord> {
 
     public View getView(int position, View convertView, ViewGroup parent) {
         PassWord passWord = getItem(position);
-        View view = LayoutInflater.from(getContext()).inflate(resourceId,parent,false);
+        View view;
+        if(convertView == null)
+            view = LayoutInflater.from(getContext()).inflate(resourceId,parent,false);
+        else
+            view = convertView;
         TextView textView = (TextView) view.findViewById(R.id.tvWebsiteName);
         textView.setText(passWord.getWebsiteName());
         return view;

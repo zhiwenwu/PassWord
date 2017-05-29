@@ -6,12 +6,28 @@ package cn.xuemcu.password;
 
 public class PassWord {
     private String websiteName;
+    private String accounts;
+    private String passWord;
 
     public PassWord(String websiteName) {
         this.websiteName = websiteName;
     }
 
+    public PassWord(String websiteName,String accounts,String passWord) {
+        this.websiteName = websiteName;
+        this.accounts = accounts;
+        this.passWord = passWord;
+    }
+
     public String getWebsiteName() {
         return this.websiteName;
+    }
+
+    public String getAccounts() {
+        return this.accounts;
+    }
+
+    public String getPassWord() {
+        return this.passWord;
     }
 }
