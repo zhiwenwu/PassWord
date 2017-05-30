@@ -75,6 +75,10 @@ public class PassWordActivity extends Activity implements AdapterView.OnItemClic
 
         btnAddTo = (Button) findViewById(R.id.btnAddTo);
         btnAddTo.setOnLongClickListener(this);
+        btnAddTo.setFocusable(true);
+        btnAddTo.setFocusableInTouchMode(true);
+        btnAddTo.requestFocus();
+        btnAddTo.requestFocusFromTouch();
 
         editsousuo = (EditText) findViewById(R.id.editsousuo);
 
