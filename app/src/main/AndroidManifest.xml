@@ -32,6 +32,11 @@
             android:theme="@style/themeFullScreen">
 
         </activity>
+
+        <activity android:name=".FigurePrintActivity"
+            android:theme="@style/themeFullScreen">
+
+        </activity>
     </application>
 
 </manifest>
