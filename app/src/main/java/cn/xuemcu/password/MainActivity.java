@@ -7,6 +7,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class MainActivity extends Activity implements Runnable {
@@ -15,7 +17,6 @@ public class MainActivity extends Activity implements Runnable {
     private boolean threadFlag = true;
     private EditText editText = null;
     private Message message = null;
-    private Calendar calendar = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +25,6 @@ public class MainActivity extends Activity implements Runnable {
 
         editText = (EditText) findViewById(R.id.edtext);
         message = new Message();
-        calendar = Calendar.getInstance();
         threadFlag = true;
         new Thread(this).start();
     }
@@ -56,19 +56,10 @@ public class MainActivity extends Activity implements Runnable {
                 e.printStackTrace();
             }
 
-            String str = "";
-            //防止时或分是一位数，导致密码不是四位数字
-            if(calendar.get(Calendar.HOUR_OF_DAY) < 10)
-                str += "0" + Integer.toString(calendar.get(Calendar.HOUR_OF_DAY));
-            else
-                str += Integer.toString(calendar.get(Calendar.HOUR_OF_DAY));
+            SimpleDateFormat sDateFormat = new SimpleDateFormat("HHmm");
+            String date = sDateFormat.format(new java.util.Date());
 
-            if(calendar.get(Calendar.MINUTE) < 10)
-                str += "0" + Integer.toString(calendar.get(Calendar.MINUTE));
-            else
-                str += Integer.toString(calendar.get(Calendar.MINUTE));
-
-            if(editText.getText().toString().equals(str)) {
+            if(editText.getText().toString().equals(date)) {
                 this.threadFlag = false;
 
                 message.what = MainActivity_PASS;

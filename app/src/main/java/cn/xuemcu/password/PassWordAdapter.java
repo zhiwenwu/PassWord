@@ -29,6 +29,9 @@ public class PassWordAdapter extends ArrayAdapter<PassWord> {
             view = convertView;
         TextView textView = (TextView) view.findViewById(R.id.tvWebsiteName);
         textView.setText(passWord.getWebsiteName());
+
+        textView = (TextView) view.findViewById(R.id.tvAccounts);
+        textView.setText("帐号:"+passWord.getAccounts());
         return view;
     }
 }
