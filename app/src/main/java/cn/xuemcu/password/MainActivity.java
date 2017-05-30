@@ -1,65 +1,71 @@
 package cn.xuemcu.password;
 
-import android.support.v4.hardware.fingerprint.FingerprintManagerCompat;
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
+import android.os.Handler;
+import android.os.Message;
+import android.widget.EditText;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    Button btnTest = null;
-    private FingerprintManagerCompat manager = null;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+public class MainActivity extends Activity implements Runnable {
+    private static final int MainActivity_TOAST = 0;
+    private static final int MainActivity_PASS = 1;
+    private boolean threadFlag = true;
+    private EditText editText = null;
+    private Message message = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnTest = (Button) findViewById(R.id.btnTest);
-        btnTest.setOnClickListener(this);
-
-        // 获取一个FingerPrintManagerCompat的实例
-        manager = FingerprintManagerCompat.from(this);
+        editText = (EditText) findViewById(R.id.edtext);
+        message = new Message();
+        threadFlag = true;
+        new Thread(this).start();
     }
+
+    private Handler mHandler = new Handler(){
+        public void handleMessage(android.os.Message msg) {
+            switch (msg.what) {
+                case MainActivity_PASS:
+                    Intent intent = new Intent();
+                    intent.setClass(MainActivity.this, PassWordActivity.class);
+                    startActivity(intent);
+                    finish();
+                    break;
+                case MainActivity_TOAST:
+                    Toast.makeText(MainActivity.this,msg.obj.toString(),Toast.LENGTH_SHORT).show();
+                    break;
+                default:
+                    break;
+            }
+        };
+    };
 
     @Override
-    public void onClick(View v) {
-        //测试程序Test
-        Toast.makeText(this, "Test", Toast.LENGTH_SHORT).show();
-        manager.authenticate(null, 0, null, new MyCallBack(), null);
-    }
+    public void run() {
+        while(this.threadFlag) {
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
-    public class MyCallBack extends FingerprintManagerCompat.AuthenticationCallback {
-        private static final String TAG = "MyCallBack";
+            SimpleDateFormat sDateFormat = new SimpleDateFormat("HHmm");
+            String date = sDateFormat.format(new java.util.Date());
 
-        // 当出现错误的时候回调此函数，比如多次尝试都失败了的时候，errString是错误信息
-        @Override
-        public void onAuthenticationError(int errMsgId, CharSequence errString) {
-            Log.d(TAG, "onAuthenticationError: " + errString);
-            Toast.makeText(MainActivity.this, "onAuthenticationError: " + errString, Toast.LENGTH_SHORT).show();
-        }
+            if(editText.getText().toString().equals(date)) {
+                this.threadFlag = false;
 
-        // 当指纹验证失败的时候会回调此函数，失败之后允许多次尝试，失败次数过多会停止响应一段时间然后再停止sensor的工作
-        @Override
-        public void onAuthenticationFailed() {
-            Log.d(TAG, "onAuthenticationFailed: " + "验证失败");
-            Toast.makeText(MainActivity.this, "onAuthenticationFailed: " + "验证失败", Toast.LENGTH_SHORT).show();
-        }
-
-        @Override
-        public void onAuthenticationHelp(int helpMsgId, CharSequence helpString) {
-            Log.d(TAG, "onAuthenticationHelp: " + helpString);
-            Toast.makeText(MainActivity.this, "onAuthenticationHelp: " + helpString, Toast.LENGTH_SHORT).show();
-        }
-
-        // 当验证的指纹成功时会回调此函数，然后不再监听指纹sensor
-        @Override
-        public void onAuthenticationSucceeded(FingerprintManagerCompat.AuthenticationResult result) {
-            Log.d(TAG, "onAuthenticationSucceeded: " + "验证成功");
-            Toast.makeText(MainActivity.this, "onAuthenticationSucceeded: " + "验证成功", Toast.LENGTH_SHORT).show();
-            Toast.makeText(MainActivity.this, "onAuthenticationSucceeded: " + "123123", Toast.LENGTH_SHORT).show();
+                message.what = MainActivity_PASS;
+                message.obj = "密码正确";
+                this.mHandler.sendMessage(this.message);
+            }
         }
     }
 }
